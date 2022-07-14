@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface ItemRepositoryCustom {
 
+    List<Item> findAllByEachCategoryMinPrice();
+
     List<Item> findByCategoryLowestAndHighest(Category category);
 }

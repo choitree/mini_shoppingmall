@@ -19,9 +19,8 @@ import java.util.List;
 @Controller
 public class ItemController {
 
-    Logger logger = LoggerFactory.getLogger(ItemController.class);
-
     private final ItemService itemService;
+    Logger logger = LoggerFactory.getLogger(ItemController.class);
 
     @GetMapping("/minCase")
     public ResponseEntity<ItemsResponseByEachCategoryMinPriceDTO> findAllByEachCategoryMinPrice() {

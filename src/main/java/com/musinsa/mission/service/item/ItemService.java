@@ -9,5 +9,7 @@ public interface ItemService {
 
     ItemsResponseByEachCategoryMinPriceDTO findAllByEachCategoryMinPrice();
 
+    ItemSimpleResponseDTO findCheapestBrandSumOfAllCategory();
+
     List<ItemSimpleResponseDTO> findByCategoryLowestAndHighest(String categoryName);
 }

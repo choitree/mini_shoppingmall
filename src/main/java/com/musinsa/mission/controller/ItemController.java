@@ -28,6 +28,12 @@ public class ItemController {
         return ResponseEntity.ok(itemService.findAllByEachCategoryMinPrice());
     }
 
+    @GetMapping("/cheapestBrand")
+    public ResponseEntity<ItemSimpleResponseDTO> findCheapestBrandSumOfAllCategory() {
+        logger.info("모든 카테고리의 합산액이 최저가인 브랜드와 합산액 조회");
+        return ResponseEntity.ok(itemService.findCheapestBrandSumOfAllCategory());
+    }
+
 
     @GetMapping("/category")
     public ResponseEntity<List<ItemSimpleResponseDTO>> findByCategoryLowestAndHighest(@RequestParam String name) {

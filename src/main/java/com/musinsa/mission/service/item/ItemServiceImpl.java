@@ -35,6 +35,11 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    public ItemSimpleResponseDTO findCheapestBrandSumOfAllCategory() {
+        return itemRepository.findCheapestBrandSumOfAllCategory();
+    }
+
+    @Override
     public List<ItemSimpleResponseDTO> findByCategoryLowestAndHighest(String categoryName) {
         Category category = categoryRepository.findByName(categoryName)
                 .orElseThrow(() -> new CategoryNotFoundException(ErrorCode.CATEGORY_NOT_FOUND, "조회하려는 카테고리가 존재하지 않습니다."));

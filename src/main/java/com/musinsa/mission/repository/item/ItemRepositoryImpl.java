@@ -3,6 +3,9 @@ package com.musinsa.mission.repository.item;
 import com.musinsa.mission.domain.Category;
 import com.musinsa.mission.domain.Item;
 import com.musinsa.mission.domain.QItem;
+import com.musinsa.mission.dto.item.ItemResponseDTO;
+import com.musinsa.mission.dto.item.ItemSimpleResponseDTO;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +34,25 @@ public class ItemRepositoryImpl implements ItemRepositoryCustom {
                 .orderBy(item.category.name.asc())
                 .fetch();
         return itemResponseDTOS;
+    }
+
+    /*
+    select sum(price), brand_id
+    from item
+    group by brand_id
+    order by sum(price) asc limit 1;
+     */
+    public ItemSimpleResponseDTO findCheapestBrandSumOfAllCategory() {
+        return queryFactory
+                .from(item)
+                .select(Projections.constructor(ItemSimpleResponseDTO.class,
+                        item.brand.name.as("brandName"),
+                        item.price.sum().as("itemPrice")
+
+                ))
+                .groupBy(item.brand.name)
+                .orderBy(item.price.sum().asc())
+                .fetchFirst();
     }
 
     public List<Item> findByCategoryLowestAndHighest(Category category) {

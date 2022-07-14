@@ -1,7 +1,10 @@
 package com.musinsa.mission.domain;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 
+@Getter
 @Entity
 @Table(name = "item")
 public class Item {

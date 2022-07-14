@@ -1,9 +1,12 @@
 package com.musinsa.mission.domain;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 @Entity
 @Table(name = "brand")
 public class Brand {
@@ -14,6 +17,6 @@ public class Brand {
 
     private String name;
 
-    @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
-    private List<Item> incomes = new ArrayList<>();
+    @OneToMany(mappedBy = "brand")
+    private List<Item> items = new ArrayList<>();
 }

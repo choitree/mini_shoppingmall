@@ -1,15 +1,14 @@
 package com.musinsa.mission.service.item;
 
 import com.musinsa.mission.dto.item.ItemSimpleResponseDTO;
-import com.musinsa.mission.dto.item.ItemsResponseByEachCategoryMinPriceDTO;
-
-import java.util.List;
+import com.musinsa.mission.dto.item.ItemsByEachCategoryMinPriceResponseDTO;
+import com.musinsa.mission.dto.item.ItemsMinAndMixByCategoryResponseDTO;
 
 public interface ItemService {
 
-    ItemsResponseByEachCategoryMinPriceDTO findAllByEachCategoryMinPrice();
+    ItemsByEachCategoryMinPriceResponseDTO findAllByEachCategoryMinPrice();
 
     ItemSimpleResponseDTO findCheapestBrandSumOfAllCategory();
 
-    List<ItemSimpleResponseDTO> findByCategoryLowestAndHighest(String categoryName);
+    ItemsMinAndMixByCategoryResponseDTO findByCategoryLowestAndHighest(String categoryName);
 }

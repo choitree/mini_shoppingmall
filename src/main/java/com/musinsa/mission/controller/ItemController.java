@@ -64,10 +64,18 @@ public class ItemController {
     }
 
     @PutMapping("/{id}")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "상품 id", required = true, dataType = "integer", paramType = "path"),
+            @ApiImplicitParam(name = "name", value = "상품명", dataType = "string"),
+            @ApiImplicitParam(name = "price", value = "상품 가격", required = true, dataType = "integer")
+    })
+    @ApiOperation(value = "상품 수정", notes = "이미 등록된 상품의 이름, 가격을 수정한다.")
     public ResponseEntity<SuccessResponse> updateItem(@PathVariable Long id,
                                                       @Validated @RequestBody ItemUpdateRequestDTO itemUpdateRequestDTO) {
         logger.info("상품 수정");
         itemService.updateItem(id, itemUpdateRequestDTO);
         return ResponseEntity.ok(new SuccessResponse(SuccessCode.MODIFIED));
     }
+
+
 }

@@ -1,6 +1,8 @@
 package com.musinsa.mission.config;
 
+import com.musinsa.mission.exception.BrandNotFoundException;
 import com.musinsa.mission.exception.CategoryNotFoundException;
+import com.musinsa.mission.exception.ItemNotFoundException;
 import com.musinsa.mission.util.ErrorCode;
 import com.musinsa.mission.util.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(CategoryNotFoundException.class)
+    @ExceptionHandler({CategoryNotFoundException.class, BrandNotFoundException.class, ItemNotFoundException.class})
     public ResponseEntity<ErrorResponse> handleCategoryNotFoundException(CategoryNotFoundException ex) {
         log.error("handleCategoryNotFoundException", ex);
         ErrorResponse response = new ErrorResponse(ex.getErrorCode());

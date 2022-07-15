@@ -1,17 +1,22 @@
 package com.musinsa.mission.controller;
 
-import com.musinsa.mission.dto.item.ItemSimpleResponseDTO;
-import com.musinsa.mission.dto.item.ItemsByEachCategoryMinPriceResponseDTO;
-import com.musinsa.mission.dto.item.ItemsMinAndMixByCategoryResponseDTO;
+import com.musinsa.mission.dto.item.request.ItemRequestDTO;
+import com.musinsa.mission.dto.item.response.ItemSimpleResponseDTO;
+import com.musinsa.mission.dto.item.response.ItemsByEachCategoryMinPriceResponseDTO;
+import com.musinsa.mission.dto.item.response.ItemsMinAndMixByCategoryResponseDTO;
 import com.musinsa.mission.service.item.ItemService;
+import com.musinsa.mission.util.SuccessCode;
+import com.musinsa.mission.util.SuccessResponse;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RequestMapping("item")
@@ -41,5 +46,19 @@ public class ItemController {
     public ResponseEntity<ItemsMinAndMixByCategoryResponseDTO> findByCategoryLowestAndHighest(@RequestParam String name) {
         logger.info("카테고리별 최소, 최대값 조회");
         return ResponseEntity.ok(itemService.findByCategoryLowestAndHighest(name));
+    }
+
+    @PostMapping("")
+    @ApiImplicitParams({
+                    @ApiImplicitParam(name = "name", value = "상품명", dataType = "string"),
+                    @ApiImplicitParam(name = "price", value = "상품 가격", required = true, dataType = "integer"),
+                    @ApiImplicitParam(name = "brandName", value = "브랜드 이름", required = true, dataType = "string"),
+                    @ApiImplicitParam(name = "categoryName", value = "카테고리 이름", required = true, dataType = "string")
+            })
+    @ApiOperation(value = "카테고리별 최소/최대 금액 및 브랜드 조회", notes = "카테고리에 따라서 최저가와 브랜드, 최고가와 브랜드의 정보를 보여준다.")
+    public ResponseEntity<SuccessResponse> createItem(@Validated @RequestBody ItemRequestDTO itemRequestDTO) {
+        logger.info("상품 추가");
+        itemService.createItem(itemRequestDTO);
+        return ResponseEntity.ok(new SuccessResponse(SuccessCode.CREATED));
     }
 }

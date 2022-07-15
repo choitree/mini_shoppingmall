@@ -1,4 +1,4 @@
-package com.musinsa.mission.dto.item;
+package com.musinsa.mission.dto.item.response;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;

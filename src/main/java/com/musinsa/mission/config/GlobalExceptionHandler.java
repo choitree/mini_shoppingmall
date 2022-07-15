@@ -1,6 +1,8 @@
-package com.musinsa.mission.exception.config;
+package com.musinsa.mission.config;
 
 import com.musinsa.mission.exception.CategoryNotFoundException;
+import com.musinsa.mission.util.ErrorCode;
+import com.musinsa.mission.util.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

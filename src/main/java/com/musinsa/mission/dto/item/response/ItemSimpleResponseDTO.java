@@ -1,9 +1,11 @@
-package com.musinsa.mission.dto.item;
+package com.musinsa.mission.dto.item.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
 
 @Getter
 @NoArgsConstructor
@@ -15,5 +17,10 @@ public class ItemSimpleResponseDTO {
 
     @JsonProperty("금액")
     private Integer itemPrice;
+
+    public ItemSimpleResponseDTO(String brandName, BigDecimal itemPrice) {
+        this.brandName = brandName;
+        this.itemPrice = itemPrice.intValue();
+    }
 }
 

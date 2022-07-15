@@ -1,27 +1,22 @@
 package com.musinsa.mission.dto.item;
 
 
-import com.musinsa.mission.domain.Item;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(exclude = {"brandName"})
 public class ItemResponseDTO {
 
+    @JsonProperty("카테고리")
     private String categoryName;
-    private String brandName;
-    private Integer itemPrice;
 
-    public static ItemResponseDTO from(Item item) {
-        return ItemResponseDTO.builder()
-                .brandName(item.getBrand().getName())
-                .itemPrice(item.getPrice())
-                .categoryName(item.getCategory().getName())
-                .build();
-    }
+    @JsonProperty("브랜드")
+    private String brandName;
+
+    @JsonProperty("가격")
+    private Integer itemPrice;
 }

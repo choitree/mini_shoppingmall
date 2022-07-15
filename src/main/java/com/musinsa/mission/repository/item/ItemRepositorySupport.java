@@ -3,17 +3,11 @@ package com.musinsa.mission.repository.item;
 import com.musinsa.mission.domain.Category;
 import com.musinsa.mission.domain.Item;
 import com.musinsa.mission.domain.QItem;
-import com.musinsa.mission.dto.item.ItemResponseDTO;
-import com.musinsa.mission.dto.item.ItemSimpleResponseDTO;
-import com.querydsl.core.dml.DeleteClause;
-import com.querydsl.core.dml.UpdateClause;
-import com.querydsl.core.types.EntityPath;
+import com.musinsa.mission.dto.item.response.ItemResponseDTO;
+import com.musinsa.mission.dto.item.response.ItemSimpleResponseDTO;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPAExpressions;
-import com.querydsl.jpa.impl.JPADeleteClause;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.querydsl.jpa.impl.JPAUpdateClause;
-import org.hibernate.Hibernate;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,19 +46,6 @@ public class ItemRepositorySupport extends QuerydslRepositorySupport {
                 .orderBy(item.category.id.asc())
                 .fetch();
         return itemResponseDTOS;
-    }
-
-    @Transactional(readOnly = true)
-    public ItemSimpleResponseDTO findCheapestBrandSumOfAllCategory() {
-        return queryFactory
-                .from(item)
-                .select(Projections.constructor(ItemSimpleResponseDTO.class,
-                        item.brand.name.as("brandName"),
-                        item.price.sum().as("itemPrice")
-                ))
-                .groupBy(item.brand.name)
-                .orderBy(item.price.sum().asc())
-                .fetchFirst();
     }
 
     @Transactional(readOnly = true)

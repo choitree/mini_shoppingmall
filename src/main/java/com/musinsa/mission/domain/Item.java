@@ -25,4 +25,13 @@ public class Item {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
+
+    public static Item CreateItem(ItemRequestDTO itemRequestDTO, Brand brand, Category category) {
+        return Item.builder()
+                .name(itemRequestDTO.getName())
+                .price(itemRequestDTO.getPrice())
+                .brand(brand)
+                .category(category)
+                .build();
+    }
 }

@@ -4,24 +4,24 @@ import com.musinsa.mission.util.ErrorCode;
 import lombok.Getter;
 
 @Getter
-public class CategoryNotFoundException extends RuntimeException {
+public class BrandNotFoundException extends RuntimeException {
 
     private ErrorCode errorCode;
 
-    public CategoryNotFoundException() {
+    public BrandNotFoundException() {
         super(ErrorCode.CATEGORY_NOT_FOUND.getMessage());
     }
 
-    public CategoryNotFoundException(String message) {
+    public BrandNotFoundException(String message) {
         super(message);
     }
 
-    public CategoryNotFoundException(ErrorCode errorCode) {
+    public BrandNotFoundException(ErrorCode errorCode) {
         super(errorCode.getMessage());
         this.errorCode = errorCode;
     }
 
-    public CategoryNotFoundException(ErrorCode errorCode, String message) {
+    public BrandNotFoundException(ErrorCode errorCode, String message) {
         super(message);
         this.errorCode = errorCode;
     }

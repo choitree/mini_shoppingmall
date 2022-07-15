@@ -1,6 +1,7 @@
 package com.musinsa.mission.domain;
 
 import com.musinsa.mission.dto.item.request.ItemRequestDTO;
+import com.musinsa.mission.dto.item.request.ItemUpdateRequestDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -42,5 +43,10 @@ public class Item {
                 .brand(brand)
                 .category(category)
                 .build();
+    }
+
+    public void updateItem(ItemUpdateRequestDTO itemUpdateRequestDTO) {
+        this.name = itemUpdateRequestDTO.getName();
+        this.price = itemUpdateRequestDTO.getPrice();
     }
 }

@@ -1,6 +1,7 @@
 package com.musinsa.mission.controller;
 
 import com.musinsa.mission.dto.item.request.ItemRequestDTO;
+import com.musinsa.mission.dto.item.request.ItemUpdateRequestDTO;
 import com.musinsa.mission.dto.item.response.ItemSimpleResponseDTO;
 import com.musinsa.mission.dto.item.response.ItemsByEachCategoryMinPriceResponseDTO;
 import com.musinsa.mission.dto.item.response.ItemsMinAndMixByCategoryResponseDTO;
@@ -60,5 +61,13 @@ public class ItemController {
         logger.info("상품 추가");
         itemService.createItem(itemRequestDTO);
         return ResponseEntity.ok(new SuccessResponse(SuccessCode.CREATED));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<SuccessResponse> updateItem(@PathVariable Long id,
+                                                      @Validated @RequestBody ItemUpdateRequestDTO itemUpdateRequestDTO) {
+        logger.info("상품 수정");
+        itemService.updateItem(id, itemUpdateRequestDTO);
+        return ResponseEntity.ok(new SuccessResponse(SuccessCode.MODIFIED));
     }
 }

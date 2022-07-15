@@ -4,12 +4,14 @@ import com.musinsa.mission.domain.Brand;
 import com.musinsa.mission.domain.Category;
 import com.musinsa.mission.domain.Item;
 import com.musinsa.mission.dto.item.request.ItemRequestDTO;
+import com.musinsa.mission.dto.item.request.ItemUpdateRequestDTO;
 import com.musinsa.mission.dto.item.response.ItemResponseDTO;
 import com.musinsa.mission.dto.item.response.ItemSimpleResponseDTO;
 import com.musinsa.mission.dto.item.response.ItemsByEachCategoryMinPriceResponseDTO;
 import com.musinsa.mission.dto.item.response.ItemsMinAndMixByCategoryResponseDTO;
 import com.musinsa.mission.exception.BrandNotFoundException;
 import com.musinsa.mission.exception.CategoryNotFoundException;
+import com.musinsa.mission.exception.ItemNotFoundException;
 import com.musinsa.mission.repository.BrandRepository;
 import com.musinsa.mission.repository.CategoryRepository;
 import com.musinsa.mission.repository.item.ItemCustomRepository;
@@ -62,6 +64,14 @@ public class ItemServiceImpl implements ItemService {
                 .orElseThrow(() -> new BrandNotFoundException(ErrorCode.BRAND_NOT_FOUND, "등록하려는 제품에 해당하는 브랜드가 존재하지 않습니다."));
 
         Item item = Item.CreateItem(itemRequestDTO, brand, category);
+        itemRepository.save(item);
+    }
+
+    @Override
+    public void updateItem(Long id, ItemUpdateRequestDTO itemUpdateRequestDTO) {
+        Item item = itemRepository.findById(id)
+                .orElseThrow(() -> new ItemNotFoundException(ErrorCode.ITEM_NOT_FOUND, "수정하려는 상품이 존재하지 않습니다."));
+        item.updateItem(itemUpdateRequestDTO);
         itemRepository.save(item);
     }
 }

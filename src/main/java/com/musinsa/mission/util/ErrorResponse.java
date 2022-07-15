@@ -1,4 +1,4 @@
-package com.musinsa.mission.exception.config;
+package com.musinsa.mission.util;
 
 import lombok.*;
 

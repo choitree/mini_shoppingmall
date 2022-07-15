@@ -1,4 +1,4 @@
-package com.musinsa.mission.exception.config;
+package com.musinsa.mission.util;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;

@@ -1,10 +1,17 @@
 package com.musinsa.mission.domain;
 
+import com.musinsa.mission.dto.item.request.ItemRequestDTO;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@Builder
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "item")
 public class Item {
@@ -19,11 +26,13 @@ public class Item {
     private Integer price;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "brand_id", referencedColumnName = "id")
+    @JoinColumn(name = "brand_id", referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "fk_item_brand"))
     private Brand brand;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    @JoinColumn(name = "category_id", referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "fk_item_category"))
     private Category category;
 
     public static Item CreateItem(ItemRequestDTO itemRequestDTO, Brand brand, Category category) {

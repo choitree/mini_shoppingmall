@@ -12,7 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ItemsByEachCategoryMinPriceResponseDTO {
 
-    @JsonProperty("카테고리별 최저가 아이템")
+    @JsonProperty("최저가리스트")
     private final List<ItemResponseDTO> itemResponseDTOS;
 
     @JsonProperty("총합")

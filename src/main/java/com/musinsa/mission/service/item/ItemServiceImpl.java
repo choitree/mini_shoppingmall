@@ -74,4 +74,11 @@ public class ItemServiceImpl implements ItemService {
         item.updateItem(itemUpdateRequestDTO);
         itemRepository.save(item);
     }
+
+    @Override
+    public void deleteItem(Long id) {
+        Item item = itemRepository.findById(id)
+                .orElseThrow(() -> new ItemNotFoundException(ErrorCode.ITEM_NOT_FOUND, "삭제하려는 상품이 존재하지 않습니다."));
+        itemRepository.delete(item);
+    }
 }

@@ -77,5 +77,14 @@ public class ItemController {
         return ResponseEntity.ok(new SuccessResponse(SuccessCode.MODIFIED));
     }
 
+    @DeleteMapping("/{id}")
+    @ApiImplicitParam(name = "id", value = "상품 id", required = true, dataType = "integer", paramType = "path")
+    public ResponseEntity<SuccessResponse> deleteItem(@PathVariable Long id) {
+        logger.info("상품 삭제");
+        itemService.deleteItem(id);
+        return ResponseEntity.ok(new SuccessResponse(SuccessCode.DELETED));
+    }
+
+
 
 }

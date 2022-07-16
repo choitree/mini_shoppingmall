@@ -36,6 +36,12 @@ public class Item {
             foreignKey = @ForeignKey(name = "fk_item_category"))
     private Category category;
 
+    public Item(Integer price, Brand brand, Category category) {
+        this.price = price;
+        this.brand = brand;
+        this.category = category;
+    }
+
     public static Item CreateItem(ItemRequestDTO itemRequestDTO, Brand brand, Category category) {
         return Item.builder()
                 .name(itemRequestDTO.getName())

@@ -44,3 +44,12 @@ cd mission
 - 테스트 코드 작성 시
   - SERVICE에서 요구사항 내 API은 단순 조회이기 때문에 MockBean을 사용했습니다.
   - 생성, 수정, 삭제 API의 경우 연관관계로 인해서, 빈을 주입받아 사용했습니다.
+ 
+## Documentation
+[포스트맨](https://documenter.getpostman.com/view/15294373/UzQvskDq)에서 확인 가능합니다.
+
+##ERD
+[WIKI](https://github.com/choitree/mission/wiki/ERD)에서 확인 가능합니다.
+##DDL
+[WIKI](https://github.com/choitree/mission/wiki/DDL)에서 확인 가능합니다.
+  

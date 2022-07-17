@@ -48,6 +48,15 @@ public class ItemRepositorySupport extends QuerydslRepositorySupport {
         return itemResponseDTOS;
     }
 
+
+    /*
+
+(select * from item where category_id = 3 order by price asc limit 1)
+union all
+(select * from item where category_id = 3 order by price desc limit 1);
+
+     */
+
     @Transactional(readOnly = true)
     public List<ItemSimpleResponseDTO> findByCategoryLowestAndHighest(Category category) {
         return queryFactory.select(Projections.constructor(ItemSimpleResponseDTO.class,
@@ -55,20 +64,7 @@ public class ItemRepositorySupport extends QuerydslRepositorySupport {
                         item.price
                 ))
                 .from(item)
-                .where((item.price.eq(
-                                JPAExpressions
-                                        .select(item.price.min())
-                                        .from(item)
-                                        .where(item.category.eq(category))
-                        )
-                        .or(
-                                item.price.eq(
-                                        JPAExpressions
-                                                .select(item.price.max())
-                                                .from(item)
-                                                .where(item.category.eq(category))
-                                )))
-                        .and(item.category.eq(category)))
+                .where(item.category.eq(category))
                 .orderBy(item.price.asc())
                 .fetch();
     }

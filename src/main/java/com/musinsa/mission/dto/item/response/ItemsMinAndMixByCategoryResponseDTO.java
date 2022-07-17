@@ -22,7 +22,7 @@ public class ItemsMinAndMixByCategoryResponseDTO {
     public static ItemsMinAndMixByCategoryResponseDTO convertListToItemsMinAndMixByCategoryResponseDTO(List<ItemSimpleResponseDTO> itemSimpleResponseDTOS) {
         return ItemsMinAndMixByCategoryResponseDTO.builder()
                 .minItem(itemSimpleResponseDTOS.get(0))
-                .maxItem(itemSimpleResponseDTOS.get(1))
+                .maxItem(itemSimpleResponseDTOS.get(itemSimpleResponseDTOS.size() - 1))
                 .build();
     }
 }

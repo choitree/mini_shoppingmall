@@ -40,7 +40,6 @@ public class ItemControllerTest {
     @Test
     @DisplayName("카테고리별 최저가 뽑아서 리스트, 총액 검사")
     void findAllByEachCategoryMinPrice() throws Exception {
-
         ItemsByEachCategoryMinPriceResponseDTO result = ItemsByEachCategoryMinPriceResponseDTO.from(
                 List.of(
                         new ItemResponseDTO("상의", "C", 10000),
@@ -63,7 +62,6 @@ public class ItemControllerTest {
     @Test
     @DisplayName("한 브랜드의 합산액이 최저가인 브랜드 및 금액 테스트")
     void findCheapestBrandSumOfAllCategory() throws Exception {
-
         ItemSimpleResponseDTO result = new ItemSimpleResponseDTO("A", 55000);
 
         given(itemService.findCheapestBrandSumOfAllCategory())
@@ -78,7 +76,6 @@ public class ItemControllerTest {
     @Test
     @DisplayName("카테고리별 최소/최대 금액, 브랜드 테스트")
     void findByCategoryLowestAndHighest() throws Exception {
-
         ItemsMinAndMixByCategoryResponseDTO result = ItemsMinAndMixByCategoryResponseDTO
                 .convertListToItemsMinAndMixByCategoryResponseDTO(List.of(
                         new ItemSimpleResponseDTO("A", 100),
@@ -100,7 +97,6 @@ public class ItemControllerTest {
     @Test
     @DisplayName("상품 생성 테스트")
     void createItem() throws Exception {
-
         ItemRequestDTO request = ItemRequestDTO.builder()
                 .brandName("A")
                 .categoryName("상의")
@@ -118,7 +114,6 @@ public class ItemControllerTest {
     @Test
     @DisplayName("상품 수정 테스트")
     void updateItem() throws Exception {
-
         ItemUpdateRequestDTO request = ItemUpdateRequestDTO.builder()
                 .name("A브랜드의 상의 세일")
                 .price(500)
@@ -135,7 +130,6 @@ public class ItemControllerTest {
     @Test
     @DisplayName("상품 삭제 테스트")
     void deleteItem() throws Exception {
-
         mockMvc.perform(delete("/item/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.message").value(equalTo("삭제되었습니다.")))

@@ -48,7 +48,6 @@ class ItemServiceImplTest {
     @Test
     @DisplayName("카테고리별 최저가 아이템 정보와 합산액 테스트")
     void findAllByEachCategoryMinPrice() {
-
         when(itemRepositorySupport.findAllByEachCategoryMinPrice())
                 .thenReturn(List.of(
                         new ItemResponseDTO("shoes", "A", 1000),
@@ -66,7 +65,6 @@ class ItemServiceImplTest {
     @Test
     @DisplayName("브랜드별 합산액 중 최저가인 브랜드명과 최저가 테스트")
     void findCheapestBrandSumOfAllCategory() {
-
         ItemSimpleResponseDTO repositoryResult = ItemSimpleResponseDTO.builder()
                 .brandName("B")
                 .itemPrice(15000)
@@ -84,7 +82,6 @@ class ItemServiceImplTest {
     @Test
     @DisplayName("카테고리의 최저가/최고가 상품 테스트")
     void findByCategoryLowestAndHighest() {
-
         Category pants = new Category("pants");
 
         when(categoryRepository.findByName("pants"))

@@ -1,7 +1,6 @@
 package com.musinsa.mission.repository.item;
 
 import com.musinsa.mission.dto.item.response.ItemSimpleResponseDTO;
-import com.querydsl.core.types.Projections;
 import lombok.RequiredArgsConstructor;
 import org.qlrm.mapper.JpaResultMapper;
 import org.springframework.stereotype.Repository;

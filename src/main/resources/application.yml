@@ -14,7 +14,7 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
-#swagger
+    #swagger
     pathmatch:
       matching-strategy: ant_path_matcher
 

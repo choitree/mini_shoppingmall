@@ -20,3 +20,13 @@
 
 ---
 
+
+실행 방법
+1. Docker-compose
+```
+clone https://github.com/choitree/mileage.git
+cd mission
+./gradlew assemble
+docker-compose up -d --build
+```
+2. 리눅스

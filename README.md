@@ -48,9 +48,9 @@ cd mission
 ## Documentation
 [포스트맨](https://documenter.getpostman.com/view/15294373/UzQvskDq)에서 확인 가능합니다.
 
-##ERD
+## ERD
 [WIKI](https://github.com/choitree/mission/wiki/ERD)에서 확인 가능합니다.  
 
-##DDL
+## DDL
 [WIKI](https://github.com/choitree/mission/wiki/DDL)에서 확인 가능합니다.
   

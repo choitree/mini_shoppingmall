@@ -57,22 +57,22 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public void createItem(ItemRequestDTO itemRequestDTO) {
+    public Item createItem(ItemRequestDTO itemRequestDTO) {
         Category category = categoryRepository.findByName(itemRequestDTO.getCategoryName())
                 .orElseThrow(() -> new CategoryNotFoundException(ErrorCode.CATEGORY_NOT_FOUND, "등록하려는 제품에 해당하는 카테고리가 존재하지 않습니다."));
         Brand brand = brandRepository.findByName(itemRequestDTO.getBrandName())
                 .orElseThrow(() -> new BrandNotFoundException(ErrorCode.BRAND_NOT_FOUND, "등록하려는 제품에 해당하는 브랜드가 존재하지 않습니다."));
 
-        Item item = Item.CreateItem(itemRequestDTO, brand, category);
-        itemRepository.save(item);
+        Item item = Item.createItem(itemRequestDTO, brand, category);
+        return itemRepository.save(item);
     }
 
     @Override
-    public void updateItem(Long id, ItemUpdateRequestDTO itemUpdateRequestDTO) {
+    public Item updateItem(Long id, ItemUpdateRequestDTO itemUpdateRequestDTO) {
         Item item = itemRepository.findById(id)
                 .orElseThrow(() -> new ItemNotFoundException(ErrorCode.ITEM_NOT_FOUND, "수정하려는 상품이 존재하지 않습니다."));
         item.updateItem(itemUpdateRequestDTO);
-        itemRepository.save(item);
+        return itemRepository.save(item);
     }
 
     @Override

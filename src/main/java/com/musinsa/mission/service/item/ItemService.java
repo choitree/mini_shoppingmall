@@ -1,5 +1,6 @@
 package com.musinsa.mission.service.item;
 
+import com.musinsa.mission.domain.Item;
 import com.musinsa.mission.dto.item.request.ItemRequestDTO;
 import com.musinsa.mission.dto.item.request.ItemUpdateRequestDTO;
 import com.musinsa.mission.dto.item.response.ItemSimpleResponseDTO;
@@ -14,9 +15,9 @@ public interface ItemService {
 
     ItemsMinAndMixByCategoryResponseDTO findByCategoryLowestAndHighest(String categoryName);
 
-    void createItem(ItemRequestDTO itemRequestDTO);
+    Item createItem(ItemRequestDTO itemRequestDTO);
 
-    void updateItem(Long id, ItemUpdateRequestDTO itemUpdateRequestDTO);
+    Item updateItem(Long id, ItemUpdateRequestDTO itemUpdateRequestDTO);
 
     void deleteItem(Long id);
 }

@@ -21,7 +21,7 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition = "null")
+    @Column(nullable = true)
     private String name;
 
     private Integer price;
@@ -42,7 +42,7 @@ public class Item {
         this.category = category;
     }
 
-    public static Item CreateItem(ItemRequestDTO itemRequestDTO, Brand brand, Category category) {
+    public static Item createItem(ItemRequestDTO itemRequestDTO, Brand brand, Category category) {
         return Item.builder()
                 .name(itemRequestDTO.getName())
                 .price(itemRequestDTO.getPrice())

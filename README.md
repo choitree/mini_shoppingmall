@@ -19,10 +19,8 @@
 - Testcontainer 1.17.3
 
 ---
-
-
-실행 방법
-1. Docker-compose
+## 실행 방법
+### 1. Docker-compose
 - Docker 및 Docker-compose가 설치되어 있어야 합니다.
 ```
 clone https://github.com/choitree/mileage.git
@@ -30,7 +28,7 @@ cd mission
 ./gradlew assemble
 docker-compose up -d --build
 ```
-2. Local
+### 2. Local
 - MySQL 8.0.29 이상 버전이 설치되어 있어야 합니다.
 - URL 및 user 정보는 applicaion.yml 파일에서 확인 가능합니다.
 ```
@@ -38,3 +36,11 @@ clone https://github.com/choitree/mileage.git
 cd mission
 ./gradlew bootrun
 ```
+---
+## 고려 사항 
+- 1+n 쿼리가 실행되지 않도록, querydsl과 native query를 혼용하여 사용했습니다.
+- 데이터를 우선 추출하고, 요구사항에 맞춰 서비스단에서 가공했습니다.
+- API 응답에 실패할 경우, 간단한 메시지와 상태값을 전달합니다.
+- 테스트 코드 작성 시
+  - SERVICE에서 요구사항 내 API은 단순 조회이기 때문에 MockBean을 사용했습니다.
+  - 생성, 수정, 삭제 API의 경우 연관관계로 인해서, 빈을 주입받아 사용했습니다.

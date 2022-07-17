@@ -30,7 +30,7 @@ cd mission
 ./gradlew assemble
 docker-compose up -d --build
 ```
-2. 로컬
+2. Local
 - MySQL 8.0.29 이상 버전이 설치되어 있어야 합니다.
 - URL 및 user 정보는 applicaion.yml 파일에서 확인 가능합니다.
 ```

@@ -1,0 +1,31 @@
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+
+
+  datasource:
+    url: jdbc:tc:mysql:8.0.28:///test
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+    user: root
+    password: password
+
+    dbcp2:
+      driver-class-name: com.mysql.jdbc.Driver
+      test-on-borrow: true
+      validation-query: SELECT 1
+      max-total: 1
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  sql:
+    init:
+      mode: never
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace

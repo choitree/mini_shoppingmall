@@ -8,9 +8,8 @@ import com.musinsa.mission.dto.item.response.ItemsMinAndMixByCategoryResponseDTO
 import com.musinsa.mission.service.item.ItemService;
 import com.musinsa.mission.util.SuccessCode;
 import com.musinsa.mission.util.SuccessResponse;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,35 +41,27 @@ public class ItemController {
     }
 
     @GetMapping("/category")
-    @ApiImplicitParam(name = "name", value = "카테고리 이름")
     @ApiOperation(value = "카테고리별 최소/최대 금액 및 브랜드 조회", notes = "카테고리에 따라서 최저가와 브랜드, 최고가와 브랜드의 정보를 보여준다.")
-    public ResponseEntity<ItemsMinAndMixByCategoryResponseDTO> findByCategoryLowestAndHighest(@RequestParam String name) {
+    public ResponseEntity<ItemsMinAndMixByCategoryResponseDTO> findByCategoryLowestAndHighest(@ApiParam(value = "조회할 카테고리 이름")
+                                                                                              @RequestParam String name) {
         logger.info("카테고리별 최소, 최대값 조회");
         return ResponseEntity.ok(itemService.findByCategoryLowestAndHighest(name));
     }
 
     @PostMapping
-    @ApiImplicitParams({
-                    @ApiImplicitParam(name = "name", value = "상품명", dataType = "string"),
-                    @ApiImplicitParam(name = "price", value = "상품 가격", required = true, dataType = "integer"),
-                    @ApiImplicitParam(name = "brandName", value = "브랜드 이름", required = true, dataType = "string"),
-                    @ApiImplicitParam(name = "categoryName", value = "카테고리 이름", required = true, dataType = "string")
-            })
     @ApiOperation(value = "카테고리별 최소/최대 금액 및 브랜드 조회", notes = "카테고리에 따라서 최저가와 브랜드, 최고가와 브랜드의 정보를 보여준다.")
-    public ResponseEntity<SuccessResponse> createItem(@Validated @RequestBody ItemRequestDTO itemRequestDTO) {
+    public ResponseEntity<SuccessResponse> createItem(@ApiParam(value = "생성할 상품 정보")
+                                                      @Validated @RequestBody ItemRequestDTO itemRequestDTO) {
         logger.info("상품 추가");
         itemService.createItem(itemRequestDTO);
         return ResponseEntity.ok(new SuccessResponse(SuccessCode.CREATED));
     }
 
     @PutMapping("/{id}")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "상품 id", required = true, dataType = "integer", paramType = "path"),
-            @ApiImplicitParam(name = "name", value = "상품명", dataType = "string"),
-            @ApiImplicitParam(name = "price", value = "상품 가격", required = true, dataType = "integer")
-    })
     @ApiOperation(value = "상품 수정", notes = "이미 등록된 상품의 이름, 가격을 수정한다.")
-    public ResponseEntity<SuccessResponse> updateItem(@PathVariable Long id,
+    public ResponseEntity<SuccessResponse> updateItem(@ApiParam(value = "수정할 상품 아이디")
+                                                      @PathVariable Long id,
+                                                      @ApiParam(value = "수정할 상품 정보(가격, 상품명)")
                                                       @Validated @RequestBody ItemUpdateRequestDTO itemUpdateRequestDTO) {
         logger.info("상품 수정");
         itemService.updateItem(id, itemUpdateRequestDTO);
@@ -78,8 +69,8 @@ public class ItemController {
     }
 
     @DeleteMapping("/{id}")
-    @ApiImplicitParam(name = "id", value = "상품 id", required = true, dataType = "integer", paramType = "path")
-    public ResponseEntity<SuccessResponse> deleteItem(@PathVariable Long id) {
+    public ResponseEntity<SuccessResponse> deleteItem(@ApiParam(value = "삭제할 상품 아이디")
+                                                      @PathVariable Long id) {
         logger.info("상품 삭제");
         itemService.deleteItem(id);
         return ResponseEntity.ok(new SuccessResponse(SuccessCode.DELETED));

@@ -49,7 +49,7 @@ public class ItemController {
         return ResponseEntity.ok(itemService.findByCategoryLowestAndHighest(name));
     }
 
-    @PostMapping("")
+    @PostMapping
     @ApiImplicitParams({
                     @ApiImplicitParam(name = "name", value = "상품명", dataType = "string"),
                     @ApiImplicitParam(name = "price", value = "상품 가격", required = true, dataType = "integer"),
@@ -84,7 +84,4 @@ public class ItemController {
         itemService.deleteItem(id);
         return ResponseEntity.ok(new SuccessResponse(SuccessCode.DELETED));
     }
-
-
-
 }

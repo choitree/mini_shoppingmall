@@ -20,6 +20,7 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
+	querydsl.extendsFrom compileClasspath
 }
 
 repositories {
@@ -34,22 +35,30 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
+
 	runtimeOnly 'mysql:mysql-connector-java'
+
+	//lombok
+	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.testcontainers:junit-jupiter'
-	testImplementation 'org.testcontainers:mysql'
-
-	//querydsl 추가
+	//querydsl
 	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
 	implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
 
+	//QLRM
 	implementation "ch.simas.qlrm:qlrm:1.7.1"
 
+	//swagger
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//junit
+	testImplementation "org.testcontainers:junit-jupiter"
+	//mysql for test
+	testImplementation 'org.testcontainers:testcontainers'
+	testImplementation 'org.testcontainers:mysql'
 }
 
 dependencyManagement {
@@ -74,10 +83,5 @@ sourceSets {
 compileQuerydsl{
 	options.annotationProcessorPath = configurations.querydsl
 }
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
-	querydsl.extendsFrom compileClasspath
-}
+
 //querydsl 추가 끝
